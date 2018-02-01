@@ -73,7 +73,7 @@ public class LeastAMNodesFirstPolicy extends BaseInterceptor implements NodeScal
     if (LOGGER.isDebugEnabled()) {
       for (SchedulerNode node : schedulerNodes.values()) {
         LOGGER.debug("Host {} is running {} containers including {} App Masters", node.getNodeID().getHost(),
-            node.getRunningContainers().size(), getNumAMContainers(node.getRunningContainers()));
+            node.getCopiedListOfRunningContainers().size(), getNumAMContainers(node.getCopiedListOfRunningContainers()));
       }
     }
     // We need to lock the YARN scheduler here. If we don't do that, then the YARN scheduler can
@@ -96,8 +96,8 @@ public class LeastAMNodesFirstPolicy extends BaseInterceptor implements NodeScal
             return 1;
           } // else, both the NMs have registered with RM
 
-          List<RMContainer> runningContainers1 = o1.getRunningContainers();
-          List<RMContainer> runningContainers2 = o2.getRunningContainers();
+          List<RMContainer> runningContainers1 = o1.getCopiedListOfRunningContainers();
+          List<RMContainer> runningContainers2 = o2.getCopiedListOfRunningContainers();
 
           Integer numRunningAMs1 = getNumAMContainers(runningContainers1);
           Integer numRunningAMs2 = getNumAMContainers(runningContainers2);

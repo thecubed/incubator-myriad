@@ -75,7 +75,7 @@ public class Node {
   }
 
   public void snapshotRunningContainers() {
-    this.containerSnapshot = new HashSet<>(node.getRunningContainers());
+    this.containerSnapshot = new HashSet<>(node.getCopiedListOfRunningContainers());
   }
 
   public void removeContainerSnapshot() {

@@ -211,7 +211,7 @@ public class YarnNodeCapacityManager extends BaseInterceptor {
 
     Node node = nodeStore.getNode(host);
     Set<RMContainer> containersBeforeSched = node.getContainerSnapshot();
-    Set<RMContainer> containersAfterSched = new HashSet<>(node.getNode().getRunningContainers());
+    Set<RMContainer> containersAfterSched = new HashSet<>(node.getNode().getCopiedListOfRunningContainers());
 
     Set<RMContainer> containersAllocatedByMesosOffer = (containersBeforeSched == null) ? containersAfterSched : Sets.difference(
         containersAfterSched, containersBeforeSched);
@@ -301,7 +301,7 @@ public class YarnNodeCapacityManager extends BaseInterceptor {
       // updates the scheduler with the new capacity for the NM.
       // the event is handled by the scheduler asynchronously
       rmContext.getDispatcher().getEventHandler().handle(new NodeResourceUpdateSchedulerEvent(rmNode, ResourceOption.newInstance(
-          rmNode.getTotalCapability(), RMNode.OVER_COMMIT_TIMEOUT_MILLIS_DEFAULT)));
+          rmNode.getTotalCapability(), ResourceOption.OVER_COMMIT_TIMEOUT_MILLIS_DEFAULT)));
     } finally {
       yarnSchedulerLock.unlock();
     }

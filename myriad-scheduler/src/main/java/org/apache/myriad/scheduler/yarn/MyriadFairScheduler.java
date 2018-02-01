@@ -28,7 +28,7 @@ import org.apache.hadoop.yarn.server.resourcemanager.rmnode.RMNodeEvent;
 import org.apache.hadoop.yarn.server.resourcemanager.rmnode.RMNodeEventType;
 import org.apache.hadoop.yarn.server.resourcemanager.scheduler.SchedulerApplicationAttempt;
 import org.apache.hadoop.yarn.server.resourcemanager.scheduler.event.SchedulerEvent;
-import org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FSSchedulerNode;
+// import org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FSSchedulerNode;
 import org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler;
 import org.apache.myriad.scheduler.yarn.interceptor.CompositeInterceptor;
 import org.apache.myriad.scheduler.yarn.interceptor.YarnSchedulerInterceptor;
@@ -103,8 +103,8 @@ public class MyriadFairScheduler extends FairScheduler {
     this.yarnSchedulerInterceptor.afterSchedulerEventHandled(event);
   }
   
-  public void addNode(FSSchedulerNode node) {
-    this.nodes.put(node.getNodeID(), node);
-  }
+//  public void addNode(FSSchedulerNode node) {
+//    this.nodes.put(node.getNodeID(), node);
+//  }
 }
 
