@@ -90,9 +90,12 @@ public class CompositeInterceptor implements YarnSchedulerInterceptor, Intercept
       for (YarnSchedulerInterceptor interceptor : interceptors.values()) {
         List<ContainerId> filteredContainers = new ArrayList<>();
         for (ContainerId containerId: containers) {
-          NodeId nodeId = attempt.getRMContainer(containerId).getContainer().getNodeId();
-          if ((nodeId != null && interceptor.getCallBackFilter().allowCallBacksForNode(nodeId))) {
-            filteredContainers.add(containerId);
+          RMContainer rmContainer = attempt.getRMContainer(containerId);
+          if (rmContainer != null) {
+            NodeId nodeId = rmContainer.getContainer().getNodeId();
+            if ((nodeId != null && interceptor.getCallBackFilter().allowCallBacksForNode(nodeId))) {
+              filteredContainers.add(containerId);
+            }
           }
         }
         if (!filteredContainers.isEmpty()) {
